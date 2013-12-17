@@ -25,6 +25,7 @@ else
       echo "building ${package}"
       make ${package}-rebuild
   done
+  make
   cd ${cdir}
 fi
 
