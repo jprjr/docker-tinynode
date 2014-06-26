@@ -11,7 +11,7 @@ The following useful modules/frameworks are installed:
 * [Underscore.js](http://underscorejs.org/)
 * [forever](https://github.com/nodejitsu/forever)
 
-Currently using buildroot 2013.11 and NodeJS 0.8.22
+Currently using buildroot 2014.05 and NodeJS 0.10.12
 
 # What do I do with this?
 
