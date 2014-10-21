@@ -1,17 +1,22 @@
 docker-tinynode
 =============
 
-A small [buildroot](http://buildroot.uclibc.org/)-based image for [Docker](http://docker.io/), with [NodeJS](http://nodejs.org/) installed.
+A small [buildroot](http://buildroot.uclibc.org/)-based image for [Docker](http://docker.io/), with [NodeJS](http://nodejs.org/) installed. It clocks in around 30MB.
 
 The following useful modules/frameworks are installed:
 
-* [Express](http://expressjs.com/) 
-* [CoffeeScript](http://coffeescript.org/)
-* [Socket IO](http://socket.io/)
-* [Underscore.js](http://underscorejs.org/)
-* [forever](https://github.com/nodejitsu/forever)
+* [NodeJS](http://nodejs.org) version 0.10.30
+* [Express](http://expressjs.com/) version 4.9.8
+* [CoffeeScript](http://coffeescript.org/) version 1.8.0
+* [Socket IO](http://socket.io/) version 1.1.0
+* [Underscore.js](http://underscorejs.org/) version 1.7.0
+* [forever](https://github.com/nodejitsu/forever) version 0.11.1
 
-Currently using buildroot 2014.05 and NodeJS 0.10.12
+Currently using buildroot 2014.08
+
+If you want to install different frameworks or specific versions, edit the
+`tinynode_defconfig` file, specifically the `BR2_PACKAGE_NODEJS_MODULES_ADDITIONAL` parameter. Everything there just gets passed to npm as-is, so you can
+specify things like `forever@0.11.1` if you want that specific version.
 
 # What do I do with this?
 
