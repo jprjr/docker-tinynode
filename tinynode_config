@@ -1,3 +1,6 @@
 buildroot_version=2014.08
 buildroot_url=http://buildroot.uclibc.org/downloads/buildroot-${buildroot_version}.tar.bz2
 packages=('nodejs')
+# users is the 'makeuser' syntax
+# see http://buildroot.uclibc.org/downloads/manual/manual.html#_appendix
+users=('default 1000 default 1000 ! /home/default -')
