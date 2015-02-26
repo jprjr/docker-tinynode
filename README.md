@@ -75,3 +75,36 @@ instead.
 
 You can overwrite any of those parameters if you want, and you could add a `CMD` parameter 
 if you want a default command to get passed to `forever`, etc.
+
+
+## Making your own stuff like this
+
+This repo has a handy script for downloading buildroot and compiling the image, `tinynode_build.sh`
+
+Here's the breakdown of what it's doing, so you can make similar images:
+
+* Download + extract buildroot, and cd into it
+* Copy "tinyfs_defconfig" from https://raw.githubusercontent.com/jprjr/docker-tinyfs/master/tinyfs_defconfig to
+  the 'configs' folder inside your extracted buildroot folder.
+* Run 'make tinyfs_defconfig' - this will setup a .config inside of buildroot with the bare minimum for compiling packages setup.
+* If you want to create users, make a file named 'users' in that extracted buildroot folder with lines like:
+```
+# syntax: username <uid> groupname <gid> <password> <home> <shell> <groups - optional> <comment - optional>
+default 1000 default 1000 ! /home/default -
+# ^ username default, uid 1000, group default, gid 1000, no password, homedir=/home/default, no shell
+john 1001 john 1001 changeme /home/john /bin/sh
+# ^ username john, uid 1001, group john, gid 1001, password "changeme", homedir=/home/john, shell=/bin/sh
+```
+
+* Run 'make menuconfig' - this will bring up an interactive menu for selecting packages, turning features on and off, etc
+  * Generally speaking, you don't want to change the toolchain options, host options, etc, unless a package requires it (they'll tell you if that's the case)
+* Once you're done, you can save your own defconfig by running `make savedefconfig`
+  * The file will just be named `defconfig`, I recommend naming it `projectname_defconfig` under the `configs` folder. 
+  * This allows you to run `make <projectname>_defconfig` in the future.
+* Once everything's setup, just type `make` - buildroot will download and setup cross-compilers, then build your packages.
+* under `output/images`, you'll have a `rootfs.tar` file - this is your new filesystem!
+* Copy `rootfs.tar` to some folder, and make a Dockerfile in that folder like:
+```
+FROM scratch
+ADD rootfs.tar /
+```
