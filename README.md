@@ -54,7 +54,7 @@ So putting it all together, you can run a command line:
 * `jprjr/tinynode` is the name of the image
 * `myapp/app.js` is the argument you're passing to `forever` - since the image's working directory is `/home/default` you can use a relative path.
 
-If you need more ports, you can just add more `-p` arguments, nd if you need to mount more 
+If you need more ports, you can just add more `-p` arguments, and if you need to mount more 
 folders, just add more `-v` arguments, etc. You could replace `myapp/app.js` with `-w myapp/app.js` 
 and forever will autoreload the script when the file changes.
 
